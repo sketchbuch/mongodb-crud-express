@@ -1,8 +1,20 @@
 {
   "name": "mongodb-crud-express",
+  "description": "A test repo trying out MongoDB with Express to create a simple CRUD API.",
   "version": "1.0.0",
+  "author": {
+    "name": "sketchbuch",
+    "url": "https://github.com/sketchbuch"
+  },
+  "bugs": {
+    "url": "https://github.com/sketchbuch/mongodb-crud-express/issues"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
   "main": "index.js",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sketchbuch/mongodb-crud-express.git"
+  },
   "scripts": {
     "dev": "nodemon src/server.js"
   },
