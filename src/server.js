@@ -19,6 +19,9 @@ MongoClient.connect(CONNECTION, OPTIONS)
     const quotesCollection = db.collection(DB_COLLECTION)
 
     app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(bodyParser.json())
+    app.use(express.static('public'))
+
     app.set('view engine', 'ejs')
     app.set('views', `${__dirname}/views/`);
 
@@ -34,6 +37,36 @@ MongoClient.connect(CONNECTION, OPTIONS)
       quotesCollection.insertOne(req.body)
         .then(result => {
           res.redirect('/')
+        })
+        .catch(error => console.error(error))
+    })
+
+    app.put('/quotes', (req, res) => {
+      quotesCollection.findOneAndUpdate(
+        { name: 'spock' },
+        {
+          $set: {
+            name: req.body.name,
+            quote: req.body.quote
+          }
+        },
+        {
+          upsert: true
+        }
+      )
+        .then(result => {
+          res.json('Success')
+        })
+        .catch(error => console.error(error))
+    })
+
+    app.delete('/quotes', (req, res) => {
+      quotesCollection.deleteOne({ name: req.body.name })
+        .then(result => {
+          if (result.deletedCount === 0) {
+            return res.json('There are no quotes by kirk')
+          }
+          res.json(`Deleted kirk's quote`)
         })
         .catch(error => console.error(error))
     })

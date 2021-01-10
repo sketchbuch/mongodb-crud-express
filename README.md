@@ -4,4 +4,4 @@
 
 A test repo trying out MongoDB with Express to create a simple CRUD API.
 
-Based on: https://zellwk.com/blog/crud-express-mongodb/
+Based on: https://zellwk.com/blog/crud-express-mongodb/ but without the CSS.

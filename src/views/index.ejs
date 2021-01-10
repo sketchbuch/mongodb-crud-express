@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <title>MongoDB CRUD Express</title>
   </head>
 
@@ -23,5 +24,23 @@
         </li>
       <% } %>
     </ul>
+
+    <div>
+      <h2>Kirk takes command!</h2>
+      <p>Replace first spock's quote with a quote written by kirk</p>
+      <button id="update-button">Replace spock's quote</button>
+    </div>
+    
+    <div>
+      <h2>Remove kirk!</h2>
+      <p>
+        Delete one of kirk's quotes. Does nothing if there are no more quotes by kirk
+      </p>
+      <button id="delete-button">Delete a kirk quote</button>
+    </div>
+
+    <div id="message"></div>
+
+    <script src="/main.js"></script>
   </body>
 </html>
