@@ -1,24 +1,29 @@
+require('dotenv-safe').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
+const config = require('../config/index')
 
 const app = express()
-const MONGO_CONNECTION = 'mongodb+srv://cruduser:9Kx1uIj34BRl@cluster0.utgru.mongodb.net/test?retryWrites=true&w=majority'
-const MONGO_OPTIONS = { useUnifiedTopology: true }
-const MONGO_DB_NAME = 'crud-tutorial'
-const MONGO_DB_COLLECTION = 'quotes'
+const DB_COLLECTION = config.get('db.collection')
+const DB_NAME = config.get('db.name')
+const NAME = config.get('name')
+const OPTIONS = { useUnifiedTopology: true }
+const PW = config.get('password')
+const UN = config.get('username')
+const CONNECTION = `mongodb+srv://${UN}:${PW}@cluster0.utgru.mongodb.net/${NAME}?retryWrites=true&w=majority`
 
-MongoClient.connect(MONGO_CONNECTION, MONGO_OPTIONS)
+MongoClient.connect(CONNECTION, OPTIONS)
   .then(client => {
-    const db = client.db(MONGO_DB_NAME)
-    const quotesCollection = db.collection(MONGO_DB_COLLECTION)
+    const db = client.db(DB_NAME)
+    const quotesCollection = db.collection(DB_COLLECTION)
 
     app.use(bodyParser.urlencoded({ extended: true }))
     app.set('view engine', 'ejs')
     app.set('views', `${__dirname}/views/`);
 
     app.get('/', (req, res) => {
-      db.collection(MONGO_DB_COLLECTION).find().toArray()
+      db.collection(DB_COLLECTION).find().toArray()
         .then(results => {
           res.render('index.ejs', { quotes: results })
         })

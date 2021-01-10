@@ -1,0 +1,9 @@
+{
+  "db": {
+    "collection": "quotes",
+    "name": "crud-tutorial"
+  },
+  "name": "test",
+  "password": "",
+  "username": ""
+}
